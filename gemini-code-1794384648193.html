@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRT to Real AI Voice Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="glass w-full max-w-lg p-8 rounded-2xl shadow-2xl">
+        <h1 class="text-2xl font-bold text-center mb-2 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">SRT to AI Voice Converter</h1>
+        <p class="text-slate-400 text-center text-sm mb-6">Upload your subtitle file and convert it into a hyper-realistic human voice instantly.</p>
+        
+        <form action="/generate" method="POST" enctype="multipart/form-data" class="space-y-5" onsubmit="showLoading()">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Upload Subtitle File (.srt or .vtt)</label>
+                <input type="file" name="srt_file" accept=".srt,.vtt" required class="w-full text-sm text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 file:cursor-pointer bg-slate-900/50 rounded-xl border border-slate-700 p-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Select Voice / Character</label>
+                <select name="voice" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                    <optgroup label="English (US)">
+                        <option value="en-US-AriaNeural">Aria (Female - Natural & Warm)</option>
+                        <option value="en-US-GuyNeural">Guy (Male - Professional)</option>
+                        <option value="en-US-JennyNeural">Jenny (Female - Clear & Friendly)</option>
+                    </optgroup>
+                    <optgroup label="Bengali (India)">
+                        <option value="bn-IN-TanishaNeural">Tanisha (Bengali Female)</option>
+                        <option value="bn-IN-BashkarNeural">Bashkar (Bengali Male)</option>
+                    </optgroup>
+                    <optgroup label="Hindi (India)">
+                        <option value="hi-IN-SwaraNeural">Swara (Hindi Female)</option>
+                        <option value="hi-IN-MadhurNeural">Madhur (Hindi Male)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-semibold rounded-xl shadow-lg transition duration-200 flex items-center justify-center space-x-2">
+                <span>Generate & Download Audio</span>
+            </button>
+        </form>
+
+        <div id="loading" class="hidden text-center mt-4 text-cyan-400 text-sm animate-pulse">
+            Generating ultra-realistic voice audio... Please wait a few seconds!
+        </div>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
